@@ -51,9 +51,6 @@ jobs:
         timeout-minutes: 5
         run: |
           docker compose up -d
-          chmod 777 ./scripts/wait-for.sh
-          chmod 777 ./scripts/wait-scripts.sh
-          ./scripts/wait-script.sh
         env:
           WAIT_PORTS: 8080,8070,8060,8050
 
