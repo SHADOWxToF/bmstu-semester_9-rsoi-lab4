@@ -19,6 +19,7 @@ jobs:
         with:
           python-version: "3.10"
       - run: |
+          pwd
           docker compose up postgres -d
           pip install -r requirements.txt
           export DATABASE_URL="postgresql://program:test@localhost:5432/flights"
@@ -51,6 +52,7 @@ jobs:
         timeout-minutes: 5
         run: |
           docker compose up -d
+
         env:
           WAIT_PORTS: 8080,8070,8060,8050
 
