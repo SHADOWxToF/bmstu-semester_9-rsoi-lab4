@@ -29,6 +29,7 @@ jobs:
       - name: Publishing
         timeout-minutes: 10
         run: |
+          touch ~/.kube/config
           echo "${KUBE_CONFIG}" | base64 -d > ~/.kube/config
           helm uninstall flights
           helm install flights ./ticketbuy -f ./ticketbuy/values-flights.yaml
