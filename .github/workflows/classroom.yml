@@ -26,13 +26,21 @@ jobs:
         with:
           version: 'v3.16.4'
 
+      - name: Install Yandex Cloud CLI
+        run: |
+          curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
+
       - name: Publishing
         timeout-minutes: 10
+        env:
+          YC_SERVICE_ACCOUNT_KEY: ${{ secrets.YC_SERVICE_ACCOUNT_KEY }}
         run: |
-          mkdir -p ~/.kube
-          echo "${KUBE_CONFIG}" | base64 -d > ~/.kube/config
-          cat ~/.kube/config
-          
+          echo "$YC_SERVICE_ACCOUNT_KEY" > key.json
+          export SA_KEY_PATH=key.json
+          yc init --sa-key $SA_KEY_PATH --cloud-id=b1gdqrp33ldf7poictmn --folder-id=b1g6gpph4cgrsecjdlci
+          yc managed-kubernetes cluster get-credentials catdnvpbp6b4j68mbgd1 --external --force > ~/.kube/config
+          kubectl cluster-info --kubeconfig ~/.kube/config
+
           sudo bash -c "echo '84.201.149.237 ticketbuy.ru' >> /etc/hosts"
 
       - name: Run API Tests
