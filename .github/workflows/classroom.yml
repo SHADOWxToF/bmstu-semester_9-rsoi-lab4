@@ -23,8 +23,7 @@ jobs:
           curl -LO https://dl.k8s.io/release/`curl -LS https://dl.k8s.io/release/stable.txt`/bin/linux/amd64/kubectl
           chmod +x ./kubectl
           sudo mv ./kubectl /usr/local/bin/kubectl
-          kubectl config use-context default --kubeconfig=test.kubeconfig
-          kubectl get services
+          echo "${KUBE_CONFIG}" | base64 -d > ~/.kube/config
           
           curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
           sudo apt-get install apt-transport-https --yes
