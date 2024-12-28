@@ -44,7 +44,7 @@ jobs:
           yc config set cloud-id b1gdqrp33ldf7poictmn
           yc config set folder-id b1g6gpph4cgrsecjdlci
           mkdir -p ~/.kube
-          kubectl cluster-info
+          yc managed-kubernetes cluster list
           yc managed-kubernetes cluster get-credentials catdnvpbp6b4j68mbgd1 --external --force > ~/.kube/config
           kubectl cluster-info --kubeconfig ~/.kube/config
 
