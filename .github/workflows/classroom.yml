@@ -40,6 +40,7 @@ jobs:
           
           echo "$YC_SERVICE_ACCOUNT_KEY" > sa-key.json
           export YC_SERVICE_ACCOUNT_KEY_FILE=sa-key.json
+          yc config set service-account-key sa-key.json
           yc config set cloud-id b1gdqrp33ldf7poictmn
           yc config set folder-id b1g6gpph4cgrsecjdlci
           mkdir -p ~/.kube
