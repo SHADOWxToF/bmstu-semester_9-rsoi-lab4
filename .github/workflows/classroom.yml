@@ -47,14 +47,24 @@ jobs:
           docker push shadowxtof/bmstu-semester_9-rsoi-lab4-tickets
           docker tag bmstu-semester_9-rsoi-lab4-gateway shadowxtof/bmstu-semester_9-rsoi-lab4-gateway
           docker push shadowxtof/bmstu-semester_9-rsoi-lab4-gateway
+          
+          curl -LO https://dl.k8s.io/release/`curl -LS https://dl.k8s.io/release/stable.txt`/bin/linux/amd64/kubectl
+          chmod +x ./kubectl
+          sudo mv ./kubectl /usr/local/bin/kubectl
+          kubectl config use-context default --kubeconfig=test.kubeconfig
+          apt-get install helm
+          helm
 
-      - name: Run containers
-        timeout-minutes: 5
-        run: |
-          docker compose up -d
+          helm uninstall flights
+          helm install flights ./ticketbuy -f ./ticketbuy/values-flights.yaml
+          helm uninstall bonuses
+          helm install bonuses ./ticketbuy -f ./ticketbuy/values-bonuses.yaml
+          helm uninstall tickets
+          helm install tickets ./ticketbuy -f ./ticketbuy/values-tickets.yaml
+          helm uninstall gateway
+          helm install gateway ./ticketbuy -f ./ticketbuy/values-gateway.yaml
 
-        env:
-          WAIT_PORTS: 8080,8070,8060,8050
+          echo "84.201.149.237 ticketbuy.ru" >> /etc/hosts
 
       - name: Run API Tests
         uses: matt-ball/newman-action@master

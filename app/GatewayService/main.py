@@ -15,9 +15,12 @@ from http import HTTPStatus
 # bonusesHost = "localhost:8050"
 # flightsHost = "localhost:8060"
 # ticketsHost = "localhost:8070"
-bonusesHost = "bonuses:8050"
-flightsHost = "flights:8060"
-ticketsHost = "tickets:8070"
+# bonusesHost = "bonuses:8050"
+# flightsHost = "flights:8060"
+# ticketsHost = "tickets:8070"
+bonusesHost = f'{os.environ["BONUS_SERVICE"]}:8050'
+flightsHost = f'{os.environ["FLIGHT_SERVICE"]}:8060'
+ticketsHost = f'{os.environ["TICKET_SERVICE"]}:8070'
 bonusesAPI = f"{bonusesHost}/api/v1"
 flightsAPI = f"{flightsHost}/api/v1"
 ticketsAPI = f"{ticketsHost}/api/v1"

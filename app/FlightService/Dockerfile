@@ -2,7 +2,7 @@ FROM python:3.10
 
 WORKDIR /code
 
-ARG database_url="postgresql://program:test@postgres:5432/flights"
+ARG database_url="postgresql://program:test@postgres-postgresql.default.svc.cluster.local:5432/flights"
 
 ENV DATABASE_URL=$database_url
 

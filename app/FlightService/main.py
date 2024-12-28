@@ -19,7 +19,7 @@ app = FastAPI()
 
 database_url = os.environ["DATABASE_URL"]
 # database_url = "postgresql://program:test@localhost:5432/flights"
-print(database_url)
+print(f'Строка подключения к БД: {database_url}')
 engine = create_engine(database_url)
 
 
