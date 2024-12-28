@@ -35,6 +35,7 @@ jobs:
         env:
           YC_SERVICE_ACCOUNT_KEY: ${{ secrets.YC_SERVICE_ACCOUNT_KEY }}
         run: |
+          source "/home/runner/.bashrc"
           echo "$YC_SERVICE_ACCOUNT_KEY" > key.json
           export SA_KEY_PATH=key.json
           yc init --sa-key $SA_KEY_PATH --cloud-id=b1gdqrp33ldf7poictmn --folder-id=b1g6gpph4cgrsecjdlci
