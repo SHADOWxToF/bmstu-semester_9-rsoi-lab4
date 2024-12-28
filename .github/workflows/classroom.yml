@@ -48,6 +48,15 @@ jobs:
           yc managed-kubernetes cluster get-credentials catdnvpbp6b4j68mbgd1 --external --force > ~/.kube/config
           kubectl cluster-info --kubeconfig ~/.kube/config
 
+          helm uninstall flights || true
+          helm install flights ./ticketbuy -f ./ticketbuy/values-flights.yaml
+          helm uninstall bonuses || true
+          helm install bonuses ./ticketbuy -f ./ticketbuy/values-bonuses.yaml
+          helm uninstall tickets || true
+          helm install tickets ./ticketbuy -f ./ticketbuy/values-tickets.yaml
+          helm uninstall gateway || true
+          helm install gateway ./ticketbuy -f ./ticketbuy/values-gateway.yaml
+
           sudo bash -c "echo '84.201.149.237 ticketbuy.ru' >> /etc/hosts"
 
       - name: Run API Tests
