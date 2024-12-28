@@ -31,7 +31,8 @@ jobs:
         run: |
           mkdir -p ~/.kube
           echo "${KUBE_CONFIG}" | base64 -d > ~/.kube/config
-          kubectl cluster-info
+          cat ~/.kube/config
+          kubectl cluster-info --kubeconfig ~/.kube/config
           helm uninstall flights || true
           helm install flights ./ticketbuy -f ./ticketbuy/values-flights.yaml
           helm uninstall bonuses || true
