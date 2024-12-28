@@ -29,13 +29,13 @@ jobs:
       - name: Install Yandex Cloud CLI
         run: |
           curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
+          exec -l $SHELL
 
       - name: Publishing
         timeout-minutes: 10
         env:
           YC_SERVICE_ACCOUNT_KEY: ${{ secrets.YC_SERVICE_ACCOUNT_KEY }}
         run: |
-          exec -l $SHELL
           source "/home/runner/.bashrc"
           echo "$YC_SERVICE_ACCOUNT_KEY" > key.json
           export SA_KEY_PATH=key.json
