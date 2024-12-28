@@ -32,9 +32,8 @@ jobs:
           mkdir -p ~/.kube
           echo "${KUBE_CONFIG}" | base64 -d > ~/.kube/config
           cat ~/.kube/config
-          
 
-          echo "84.201.149.237 ticketbuy.ru" >> /etc/hosts
+          sudo echo "84.201.149.237 ticketbuy.ru" >> /etc/hosts
 
       - name: Run API Tests
         uses: matt-ball/newman-action@master
