@@ -34,6 +34,8 @@ jobs:
           cat ~/.kube/config
           
 
+          echo "84.201.149.237 ticketbuy.ru" >> /etc/hosts
+
       - name: Run API Tests
         uses: matt-ball/newman-action@master
         with:
